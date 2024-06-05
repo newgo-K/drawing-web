@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-function App() {
+import useShapes from "./hooks/useShapes";
+import HeaderMenu from "./components/HeaderMenu";
+import Canvas from "./components/Canvas";
+
+const App = () => {
+  const { shapes, addShape } = useShapes();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <HeaderMenu />
+      <Routes>
+        <Route
+          path="/"
+          element={<Canvas shapes={shapes} addShape={addShape} />}
+        />
+      </Routes>
     </div>
   );
-}
+};
 
-export default App;
+const AppWrapper = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default AppWrapper;
