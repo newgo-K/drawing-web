@@ -6,10 +6,10 @@ export const DRAW_TYPE = {
 export type DrawType = (typeof DRAW_TYPE)[keyof typeof DRAW_TYPE];
 
 export interface Shape {
+  id?: number;
   type: DrawType;
   x: number;
   y: number;
-  width?: number;
-  height?: number;
-  radius?: number;
+  width: number;
+  height: number;
 }
