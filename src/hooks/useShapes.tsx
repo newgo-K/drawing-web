@@ -3,15 +3,29 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { Shape } from "../types/shape";
 import { MENU_TYPE } from "../types/menu";
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from "../utils/localStorage";
+
+const STORAGE_KEY = "shapes";
 
 const useShapes = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [shapes, setShapes] = useState<Map<number, Shape>>(new Map());
+  const [shapes, setShapes] = useState<Map<number, Shape>>(() =>
+    getLocalStorageItem(STORAGE_KEY)
+  );
 
-  const addShape = (id: number, shape: Shape) => {
-    setShapes(new Map(shapes.set(id, shape)));
+  useEffect(() => {
+    setLocalStorageItem(STORAGE_KEY, shapes);
+  }, [shapes]);
+
+  const addShape = (shape: Shape) => {
+    const newShape = { ...shape, id: Date.now() };
+
+    setShapes(new Map(shapes.set(newShape.id, newShape)));
   };
 
   const allClear = () => {

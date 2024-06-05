@@ -5,7 +5,7 @@ import Shape from "./Shape";
 
 interface CanvasProps {
   shapes: Map<number, ShapeType>;
-  addShape: (id: number, shape: ShapeType) => void;
+  addShape: (shape: ShapeType) => void;
 }
 
 const Canvas = ({ shapes, addShape }: CanvasProps) => {

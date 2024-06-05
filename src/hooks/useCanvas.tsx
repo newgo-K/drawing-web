@@ -5,7 +5,7 @@ import { Shape, DRAW_TYPE, DrawType } from "../types/shape";
 
 type Position = { x: number; y: number };
 
-export const useCanvas = (addShape: (id: number, shape: Shape) => void) => {
+export const useCanvas = (addShape: (shape: Shape) => void) => {
   const location = useLocation();
 
   const canvasRef = useRef<HTMLUListElement | null>(null);
@@ -74,7 +74,7 @@ export const useCanvas = (addShape: (id: number, shape: Shape) => void) => {
     if (endPos) {
       const newShape = calculateShape(startPos, endPos);
 
-      addShape(Date.now(), newShape);
+      addShape(newShape);
       setDrawing(false);
       setCurrentShape(null);
     }
